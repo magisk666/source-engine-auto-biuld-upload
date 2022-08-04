@@ -1,15 +1,33 @@
-# This is a basic workflow to help you get started with the GitHub Auto-Release on Commit Action.
-name: AutoRelease
+name: Build upload test
 
 on:
   push:
-    branches: [ master ]
+    branches:
+      - "*"
+  pull_request:
+    branches:
+      - "*"
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  build-linux-i386:
+    runs-on: ubuntu-18.04
 
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build linux-i386
+      run: |
+        scripts/build-ubuntu-i386.sh
 
-    build-android-armv7a:
+  build-linux-amd64:
+    runs-on: ubuntu-18.04
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build linux-amd64
+      run: |
+        scripts/build-ubuntu-amd64.sh
+
+  build-android-armv7a:
     runs-on: ubuntu-18.04
 
     steps:
@@ -17,19 +35,45 @@ jobs:
     - name: Build android-armv7a
       run: |
         scripts/build-android-armv7a.sh
-  # This workflow contains a single job called "build"
-  release:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
+  build-windows-i386:
+    runs-on: windows-2019
+
     steps:
-      - uses: actions/checkout@v2
-      - uses: CupOfTea696/gh-action-auto-release@v1.0.0
-        with:
-          title: "Release: $version"
-          tag: "v$semver"
-          draft: false
-          regex: "/^Release: #{semver}$/i"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - uses: actions/checkout@v2
+    - name: Build windows-i386
+      run: |
+        git submodule init && git submodule update
+        ./waf.bat configure -T debug
+        ./waf.bat build
+
+  build-dedicated-windows-i386:
+    runs-on: windows-2019
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build dedicated windows-i386
+      run: |
+        git submodule init && git submodule update
+        ./waf.bat configure -T debug -d
+        ./waf.bat build
+
+  build-dedicated-linux-i386:
+    runs-on: ubuntu-18.04
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build dedicated linux-i386
+      run: |
+        scripts/build-ubuntu-i386.sh -d
+
+  build-dedicated-linux-amd64:
+    runs-on: ubuntu-18.04
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build dedicated linux-amd64
+      run: |
+        scripts/build-ubuntu-amd64.sh -d
+    - name: Auto Release
+      uses: CupOfTea696/gh-action-auto-release@v1.0.2
