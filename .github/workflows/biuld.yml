@@ -22,7 +22,7 @@ jobs:
 
   
   - name: Create Release
-      id: create_release
+        id: create_release
         uses: actions/checkout@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
