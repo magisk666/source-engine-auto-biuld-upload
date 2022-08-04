@@ -20,7 +20,7 @@ jobs:
       run: |
         scripts/build-android-armv7a.sh
   
-    - name: Create Release
+- name: Create Release
         id: create_release
         uses: actions/checkout@v2
         env:
