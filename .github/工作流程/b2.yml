@@ -1,0 +1,19 @@
+name: Build tests
+
+on:
+  push:
+    branches:
+      - "*"
+  pull_request:
+    branches:
+      - "*"
+
+jobs:
+  build-android-armv7a:
+    runs-on: ubuntu-18.04
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build android-armv7a
+      run: |
+        scripts/build-android-armv7a.sh
