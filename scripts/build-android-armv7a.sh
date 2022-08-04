@@ -7,3 +7,4 @@ export ANDROID_NDK_HOME=$PWD/android-ndk-r10e/
 export NDK_HOME=$PWD/android-ndk-r10e/
 ./waf configure -T debug --android=armeabi-v7a-hard,4.9,21 --togles --disable-warns &&
 ./waf build
+tar -tcf build
