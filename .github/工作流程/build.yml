@@ -1,4 +1,4 @@
-name: Build tests
+name: Build upload test
 
 on:
   push:
@@ -75,3 +75,5 @@ jobs:
     - name: Build dedicated linux-amd64
       run: |
         scripts/build-ubuntu-amd64.sh -d
+    - name: Auto Release
+      uses: CupOfTea696/gh-action-auto-release@v1.0.2
