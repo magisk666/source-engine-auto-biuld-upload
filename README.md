@@ -2,7 +2,7 @@
 Welcome to source engine:)
 
 Discord: https://discord.gg/hZRB7WMgGw
-
+Chinese:says ：我想这是一个错误的决定，至少从结构上来说。
 # Current tasks
 - [x] Windows build support for waf
 - [x] NEON support
