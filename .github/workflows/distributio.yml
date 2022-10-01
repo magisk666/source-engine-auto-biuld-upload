@@ -1,0 +1,39 @@
+name: Build dedicated server
+on: [push, pull_request]
+jobs:
+  windows_cstrike_dedicated_x86:
+    runs-on: windows-2019
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        submodules: recursive
+    - name: Create output dir
+      run: mkdir ./out
+    - name: Configure build
+      run: ./waf configure -T debug -d --build-game=cstrike --prefix=./out
+    - name: Build
+      run: ./waf install
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: windows_cstrike_dedicated_x86
+        path: ./out
+  windows_hl2mp_dedicated_x86:
+    runs-on: windows-2019
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        submodules: recursive
+    - name: Create output dir
+      run: mkdir ./out
+    - name: Configure build
+      run: ./waf configure -T debug -d --build-game=hl2mp --prefix=./out
+    - name: Build
+      run: ./waf install
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: windows_hl2mp_dedicated_x86
+        path: ./out
