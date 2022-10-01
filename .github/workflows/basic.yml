@@ -1,4 +1,4 @@
-name: Build
+name: Basic
 
 on:
   push:
@@ -17,6 +17,15 @@ jobs:
     - name: Build linux-i386
       run: |
         scripts/build-ubuntu-i386.sh
+        ls -la
+        find ./build -type f -name "*.o" -delete
+        find ./build -type f -name "*.pdb" -delete
+        find ./build -type d -empty -delete
+        zip -r build-linux-i386.zip build
+    - uses: actions/upload-artifact@v2
+      with:
+        name: Source Engine - Linux 32-bit
+        path: ./*.zip
 
   build-linux-amd64:
     runs-on: ubuntu-18.04
@@ -26,6 +35,15 @@ jobs:
     - name: Build linux-amd64
       run: |
         scripts/build-ubuntu-amd64.sh
+        ls -la
+        find ./build -type f -name "*.o" -delete
+        find ./build -type f -name "*.pdb" -delete
+        find ./build -type d -empty -delete
+        zip -r build-linux-amd64.zip build
+    - uses: actions/upload-artifact@v2
+      with:
+        name: Source Engine - Linux 64-bit
+        path: ./*.zip
 
   build-android-armv7a:
     runs-on: ubuntu-18.04
@@ -35,6 +53,16 @@ jobs:
     - name: Build android-armv7a
       run: |
         scripts/build-android-armv7a.sh
+        ls -la
+        find ./build -type f -name "*.o" -delete
+        find ./build -type f -name "*.pdb" -delete
+        find ./build -type d -empty -delete
+        rm -f android*.zip
+        zip -r build-android-armv7a.zip build
+    - uses: actions/upload-artifact@v2
+      with:
+        name: Source Engine - Android armv7a
+        path: ./*.zip
 
   build-windows-i386:
     runs-on: windows-2019
@@ -44,5 +72,16 @@ jobs:
     - name: Build windows-i386
       run: |
         git submodule init && git submodule update
+        # ./waf.bat configure -T release
+        # ./waf.bat build
         ./waf.bat configure -T debug
         ./waf.bat build
+        Remove-Item -Path .\build\* -Include *.o -Recurse -Force
+        Remove-Item -Path .\build\* -Include *.pdb -Recurse -Force
+        robocopy ".\build" ".\build" /S /move
+        choco install zip
+        zip -r build-windows-i386.zip build
+    - uses: actions/upload-artifact@v2
+      with:
+        name: Source Engine - Windows 32-bit
+        path: ./*.zip
