@@ -36,7 +36,7 @@ LINKFLAGS = {
 	'common': {
 		'msvc':  ['/DEBUG'], # always create PDB, doesn't affect result binaries
 		'gcc':   ['-Wl,--no-undefined'],
-		'owcc':  ['-Wl,option stack=512k']
+		'owcc':  ['-Wl,option stack=512k', '-fvisibility=hidden']
 	},
 	'sanitize': {
 		'clang': ['-fsanitize=undefined', '-fsanitize=address'],
@@ -48,8 +48,8 @@ CFLAGS = {
 	'common': {
 		# disable thread-safe local static initialization for C++11 code, as it cause crashes on Windows XP
 		'msvc':    ['/D_USING_V110_SDK71_', '/Zi', '/FS', '/Zc:threadSafeInit-'],
-		'clang':   ['-g0', '-fno-strict-aliasing'],
-		'gcc':     ['-g0', '-fno-strict-aliasing'],
+		'clang':   ['-fno-strict-aliasing'],
+		'gcc':     ['-g0', '-fno-strict-aliasing', '-fvisibility=hidden'],
 		'owcc':	   ['-fno-short-enum', '-ffloat-store', '-g0']
 	},
 	'fast': {
@@ -67,7 +67,7 @@ CFLAGS = {
 	'release': {
 		'msvc':    ['/O2', '/MT'],
 		'owcc':    ['-O3', '-fomit-leaf-frame-pointer', '-fomit-frame-pointer', '-finline-functions', '-finline-limit=512'],
-		'default': ['-O2', '-funsafe-math-optimizations', '-ftree-vectorize']
+		'default': ['-O2', '-funsafe-math-optimizations', '-ftree-vectorize', '-ffast-math']
 	},
 	'debug': {
 		'msvc':    ['/Od', '/MTd'],
