@@ -484,7 +484,7 @@ void CWorldCollideContextData::CalculatePlanes( CParticleCollection *pParticles,
 	{
 		case COLLISION_MODE_INITIAL_TRACE_DOWN:
 		{
-			SetBaseTrace( 0, rayStart, 1000.0 * Vector( -1, 0, 0 ), nCollisionGroup, false );
+			SetBaseTrace( 0, rayStart, 1000.0f * Vector( -1, 0, 0 ), nCollisionGroup, false );
 			m_nActivePlanes = 1;
 			m_nNumFixedPlanes = 1;
 			break;
@@ -498,7 +498,7 @@ void CWorldCollideContextData::CalculatePlanes( CParticleCollection *pParticles,
 					{
 						if ( i || j || k )
 						{
-							SetBaseTrace( nIndexOut++, rayStart, 1000.0 * Vector( i, j, k ), nCollisionGroup, false );
+							SetBaseTrace( nIndexOut++, rayStart, 1000.0f * Vector( i, j, k ), nCollisionGroup, false );
 						}
 					}
 			m_nNumFixedPlanes = nIndexOut;
@@ -524,7 +524,7 @@ void CWorldCollideContextData::CalculatePlanes( CParticleCollection *pParticles,
 					{
 						if ( i || j || k )
 						{
-							SetBaseTrace( nIndexOut++, rayStart, 1000.0 * Vector( i, j, k ), nCollisionGroup, true );
+							SetBaseTrace( nIndexOut++, rayStart, 1000.0f * Vector( i, j, k ), nCollisionGroup, true );
 						}
 					}
 			m_nNumFixedPlanes = nIndexOut;
@@ -704,7 +704,7 @@ struct ISectData_t
 static void WorldIntersectTNew( FourVectors const *pStartPnt, FourVectors const *pEndPnt, 
 								int nCollisionGroup, int nMask, ISectData_t *pISectData,
 								int nCollisionMode, CWorldCollideContextData *pCtx, fltx4 const &fl4ParticleValidMask,
-								float flTolerance = 0.0 )
+								float flTolerance = 0.0f )
 {
 	pISectData->m_ISectT = Four_Zeros;
 	pISectData->m_LeftOverT = Four_Zeros;
