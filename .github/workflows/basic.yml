@@ -55,9 +55,8 @@ jobs:
         scripts/build-android-armv7a.sh
         ls -la
         find ./build -type f -name "*.o" -delete
-        find ./build -type f -name "*.pdb" -delete
         find ./build -type d -empty -delete
-        rm -f android*.zip
+        rm -rf android*.zip
         zip -r build-android-armv7a.zip build
     - uses: actions/upload-artifact@v2
       with:
