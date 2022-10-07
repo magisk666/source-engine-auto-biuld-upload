@@ -1975,6 +1975,16 @@ void CPhysicsEnvironment::ReadStats( physics_stats_t *pOutput )
 	}
 }
 
+void CPhysicsEnvironment::SetAlternateGravity(const Vector &gravityVector){}
+
+void CPhysicsEnvironment::GetAlternateGravity(Vector *pGravityVector) const
+{
+    const IVP_U_Point *gravity = m_pPhysEnv->get_gravity();
+    pGravityVector->x = IVP2HL( gravity->k[0] );
+    pGravityVector->y = IVP2HL( gravity->k[1] );
+    pGravityVector->z = -IVP2HL( gravity->k[2] );
+}
+
 void CPhysicsEnvironment::ClearStats()
 {
 	IVP_Statistic_Manager *stats = m_pPhysEnv->get_statistic_manager();
