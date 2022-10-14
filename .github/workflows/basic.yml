@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout
+    - uses: actions/checkoutv2
     - name: Build linux-amd64
       run: |
         scripts/build-ubuntu-amd64.sh
@@ -40,7 +40,7 @@ jobs:
         find ./build -type f -name "*.pdb" -delete
         find ./build -type d -empty -delete
         zip -r build-linux-amd64.zip build
-    - uses: actions/upload-artifact
+    - uses: actions/upload-artifactv2
       with:
         name: Source Engine - Linux 64-bit
         path: ./*.zip
