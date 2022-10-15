@@ -5,7 +5,7 @@ jobs:
     runs-on: windows-2019
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         submodules: recursive
     - name: Create output dir
@@ -15,7 +15,7 @@ jobs:
     - name: Build
       run: ./waf install
     - name: Upload artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: windows_cstrike_dedicated_x86
         path: ./out
