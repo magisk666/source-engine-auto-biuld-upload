@@ -24,7 +24,7 @@ jobs:
         zip -r build-linux-i386.zip build
     - uses: actions/upload-artifact@v2
       with:
-        name: Source Engine - Linux 32-bit
+        name: Source Engine-hl2dm-Android
         path: ./*.zip
 
   build-linux-amd64:
