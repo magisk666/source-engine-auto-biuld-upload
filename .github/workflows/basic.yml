@@ -9,19 +9,19 @@ on:
       - "*"
 
 jobs:
-  build-linux-i386:
-    runs-on: ubuntu-18.04
+  build-linux-x64-android-hl2dm:
+    runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Build linux-i386
+    - uses: actions/checkout@v3
+    - name: Build android-armabi-v7a-hl2dm
       run: |
         scripts/build-ubuntu-i386.sh
         ls -la
         find ./build -type f -name "*.o" -delete
-        find ./build -type f -name "*.pdb" -delete
         find ./build -type d -empty -delete
-        zip -r build-linux-i386.zip build
+        rm -rf android*.zip
+        zip -r build-android-hl2dm-armv7a.zip build
     - uses: actions/upload-artifact@v2
       with:
         name: Source Engine-hl2dm-Android
@@ -45,22 +45,22 @@ jobs:
         name: Source Engine - Linux 64-bit
         path: ./*.zip
 
-  build-android-armv7a:
+  build-android-armv7a-css:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Build android-armv7a
+    - uses: actions/checkout@v3
+    - name: Build android-armv7a-css
       run: |
         scripts/build-android-armv7a.sh
         ls -la
         find ./build -type f -name "*.o" -delete
         find ./build -type d -empty -delete
         rm -rf android*.zip
-        zip -r build-android-armv7a.zip build
+        zip -r build-android-css-armv7a.zip build
     - uses: actions/upload-artifact@v2
       with:
-        name: Source Engine - Android armv7a
+        name: Source Engine -css-Android armv7a
         path: ./*.zip
 
   build-windows-i386:
