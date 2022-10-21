@@ -22,7 +22,7 @@ jobs:
         find ./build -type d -empty -delete
         rm -rf android*.zip
         zip -r build-android-hl2dm-armv7a.zip build
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v3
       with:
         name: Source Engine-hl2dm-Android
         path: ./*.zip
@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Build linux-amd64
       run: |
         scripts/build-ubuntu-amd64.sh
@@ -40,7 +40,7 @@ jobs:
         find ./build -type f -name "*.pdb" -delete
         find ./build -type d -empty -delete
         zip -r build-linux-amd64.zip build
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v3
       with:
         name: Source Engine - Linux 64-bit
         path: ./*.zip
@@ -58,7 +58,7 @@ jobs:
         find ./build -type d -empty -delete
         rm -rf android*.zip
         zip -r build-android-css-armv7a.zip build
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v3
       with:
         name: Source Engine -css-Android armv7a
         path: ./*.zip
@@ -67,7 +67,7 @@ jobs:
     runs-on: windows-2019
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Build windows-i386
       run: |
         git submodule init && git submodule update
@@ -80,7 +80,7 @@ jobs:
         robocopy ".\build" ".\build" /S /move
         choco install zip
         zip -r build-windows-i386.zip build
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v3
       with:
         name: Source Engine - Windows 32-bit
         path: ./*.zip
