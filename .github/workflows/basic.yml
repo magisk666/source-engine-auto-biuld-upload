@@ -39,10 +39,10 @@ jobs:
         find ./build -type f -name "*.o" -delete
         find ./build -type d -empty -delete
         rm -rf android*.zip
-        zip -r build-linux-amd64.zip build
+        zip -r build-hl2-32.zip build
     - uses: actions/upload-artifact@v3
       with:
-        name: Source Engine-hls-32-bit
+        name: Source Engine-hl2-32-bit
         path: ./*.zip
 
   build-android-armv7a-css:
