@@ -9,12 +9,12 @@ on:
       - "*"
 
 jobs:
-  tests-linux-aarch64:
+  tests-linux-x86:
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
-    - name: Run tests-dod-android
+    - name: Run tests-x86_ver-android
       run: |
         git submodule init && git submodule update
         wget https://dl.google.com/android/repository/android-ndk-r10e-linux-x86_64.zip -o /dev/null
@@ -22,15 +22,15 @@ jobs:
         export ANDROID_NDK_HOME=$PWD/android-ndk-r10e/
         export NDK_HOME=$PWD/android-ndk-r10e/
         ./waf --help
-        ./waf configure -T release --android=x86,host,21 --togles --build-games=hl2 --use-ccache --64bits --disable-warns --sanitize=address
+        ./waf configure -T release --android=x86,host,21 --togl --build-games=hl2 --use-ccache --64bits --disable-warns --sanitize=address
         ./waf build
         ./waf --help
         ls -la
         find ./build -type f -name "*.o" -delete
         find ./build -type d -empty -delete
         rm -rf android*.zip
-        zip -r build-android-hl2-arm64.zip build
+        zip -r build-android-hl2-x86_togl.zip build
     - uses: actions/upload-artifact@v3
       with:
-        name: Source Engine-hl2-64-bit
+        name: Source Engine-hl2-32bit-x86
         path: ./*.zip
