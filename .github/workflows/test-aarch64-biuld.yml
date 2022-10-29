@@ -1,0 +1,36 @@
+name: Tests-aarch64
+
+on:
+  push:
+    branches:
+      - "*"
+  pull_request:
+    branches:
+      - "*"
+
+jobs:
+  tests-linux-aarch64:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Run tests-dod-android
+      run: |
+        git submodule init && git submodule update
+        wget https://dl.google.com/android/repository/android-ndk-r10e-linux-x86_64.zip -o /dev/null
+        unzip android-ndk-r10e-linux-x86_64.zip
+        export ANDROID_NDK_HOME=$PWD/android-ndk-r10e/
+        export NDK_HOME=$PWD/android-ndk-r10e/
+        ./waf --help
+        ./waf configure -T release --android=aarch64,host,21 --togles --biuld-game=hl2 --use-ccache --64bits --disable-warns --sanitize=address
+        ./waf build
+        ./waf --help
+        ls -la
+        find ./build -type f -name "*.o" -delete
+        find ./build -type d -empty -delete
+        rm -rf android*.zip
+        zip -r build-android-hl2-arm64.zip build
+    - uses: actions/upload-artifact@v3
+      with:
+        name: Source Engine-hl2-64-bit
+        path: ./*.zip
