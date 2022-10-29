@@ -1,4 +1,4 @@
-name: Tests-aarch64
+name: Tests-aarch64&x86
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
 
 jobs:
   tests-linux-x86:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
 
     steps:
     - uses: actions/checkout@v3
