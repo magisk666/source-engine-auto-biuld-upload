@@ -6,7 +6,7 @@ unzip android-ndk-r10e-linux-x86_64.zip
 export ANDROID_NDK_HOME=$PWD/android-ndk-r10e/
 export NDK_HOME=$PWD/android-ndk-r10e/
 ./waf --help
-./waf configure -T release --android=armeabi-v7a-hard,4.9,21 --togles --build-game=hl2mp --disable-warns &&
+./waf configure -T release --android=armeabi-v7a-hard,4.9,21 --use-togl=GL --build-game=hl2mp --disable-warns &&
 ./waf build
 #git submodule init && git submodule update
 #sudo dpkg --add-architecture i386
