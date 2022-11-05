@@ -22,7 +22,7 @@ jobs:
         export ANDROID_NDK_HOME=$PWD/android-ndk-r10e/
         export NDK_HOME=$PWD/android-ndk-r10e/
         ./waf --help
-        ./waf configure -T release --android=armeabi-v7a-hard,4.9,21 --use-togl=GL --build-game=hl2 --disable-warns &&
+        ./waf configure -T release --android=arm64-v8a,4.9,21 --togles --build-game=hl2 &&
         ./waf build
         ./waf --help
         ls -la
