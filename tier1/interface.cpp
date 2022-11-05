@@ -323,7 +323,7 @@ CSysModule *Sys_LoadModule( const char *pModuleName, Sys_Flags flags /* = SYS_NO
 			hDLL = Sys_LoadLibrary(szAbsoluteModuleName, flags);
 
 			if( !hDLL && bFound )
-				Error("Can't load mod library %s\n", szAbsoluteModuleName);
+				Error("无法加载模组动态链接库 %s\n", szAbsoluteModuleName);
 		}
 
 		Q_snprintf(szAbsoluteModuleName, sizeof(szAbsoluteModuleName), "%s/lib%s", libPath ,pModuleName);
@@ -340,13 +340,13 @@ CSysModule *Sys_LoadModule( const char *pModuleName, Sys_Flags flags /* = SYS_NO
 		else
 			Q_snprintf( szAbsoluteModuleName, sizeof(szAbsoluteModuleName), "%s/bin/%s", szCwd, pModuleName );
 #endif // ANDROID
-		Msg("LoadLibrary: pModule: %s, path: %s\n", pModuleName, szAbsoluteModuleName);
+		Msg("加载动态链接库: pModule: %s, path: %s\n", pModuleName, szAbsoluteModuleName);
 
 		if( !hDLL )
 			hDLL = Sys_LoadLibrary( szAbsoluteModuleName, flags );
 	}
 	else
-		Msg("LoadLibrary: path: %s\n", pModuleName);
+		Msg（"加载动态链接库: path: %s\n", pModuleName);
 
 
 	if ( !hDLL )
